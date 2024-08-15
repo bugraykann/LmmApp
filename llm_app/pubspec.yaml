@@ -1,0 +1,60 @@
+name: llm_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.2 <4.0.0'
+
+dependencies:
+  animated_text_kit: ^4.2.2
+  dartx: ^1.2.0
+  dartz: ^0.10.1
+  dio: ^5.5.0+1
+  flutter:
+    sdk: flutter
+  flutter_localization: ^0.2.1
+  flutter_riverpod: ^2.5.1
+  flutter_secure_storage: ^9.2.2
+  flutter_web_auth: ^0.5.0
+  go_router: ^14.2.2
+  hive_flutter: ^1.1.0
+  intl: ^0.18.1
+  riverpod: ^2.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/rive/
+    - assets/lotties/
+    - assets/icons/
+    
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/poppins_thin.ttf
+          weight: 100
+        - asset: assets/fonts/poppins/poppins_extra_light.ttf
+          weight: 200
+        - asset: assets/fonts/poppins/poppins_light.ttf
+          weight: 300
+        - asset: assets/fonts/poppins/poppins_regular.ttf
+          weight: 400
+        - asset: assets/fonts/poppins/poppins_medium.ttf
+          weight: 500
+        - asset: assets/fonts/poppins/poppins_semi_bold.ttf
+          weight: 600
+        - asset: assets/fonts/poppins/poppins_bold.ttf
+          weight: 700
+        - asset: assets/fonts/poppins/poppins_extra_bold.ttf
+          weight: 800
+        - asset: assets/fonts/poppins/poppins_black.ttf
+          weight: 900
