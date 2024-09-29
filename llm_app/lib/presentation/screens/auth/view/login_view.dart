@@ -62,8 +62,8 @@ class _LoginViewState extends ConsumerState<LoginView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset(CustomIcons.asPng('spotify'),
-                              width: context.mediaQuerySize.width * 0.075),
+                          // Image.asset(CustomIcons.asPng('spotify'),
+                          //     width: context.mediaQuerySize.width * 0.075),
                           context.box.emptySizedWidthBoxLow,
                           Flexible(
                             child: Text(

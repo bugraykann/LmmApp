@@ -34,7 +34,12 @@ abstract final class Routes {
           GoRoute(
             name: detail,
             path: 'detail',
-            builder: (context, state) => const AlbumDetailView(),
+            builder: (context, state) {
+              final args = state.extra;
+              return AlbumDetailView(
+                args: args,
+              );
+            },
           )
         ],
       ),

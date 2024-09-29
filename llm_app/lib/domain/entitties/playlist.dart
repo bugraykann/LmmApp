@@ -1,40 +1,43 @@
-class SimplePlaylist {
-  List<SimpleTrack>? tracks;
+class PlaylistModel {
+  List<PlaylistData>? playlists;
+  String? nextUrl;
 
-  SimplePlaylist({this.tracks});
+  PlaylistModel({this.playlists, this.nextUrl});
 
-  SimplePlaylist.fromJson(Map<String, dynamic> json) {
+  PlaylistModel.fromJson(Map<String, dynamic> json) {
     if (json['items'] != null) {
-      tracks = <SimpleTrack>[];
+      playlists = <PlaylistData>[];
       json['items'].forEach((item) {
-        // `item['track']` 'track' nesnesini alır
-        tracks!.add(SimpleTrack.fromJson(item['track']));
+        playlists!.add(PlaylistData.fromJson(item));
       });
     }
+    nextUrl = json['next'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (tracks != null) {
-      data['items'] =
-          tracks!.map((track) => {'track': track.toJson()}).toList();
+    if (playlists != null) {
+      data['items'] = playlists!.map((playlist) => playlist.toJson()).toList();
     }
+    data['next'] = nextUrl;
     return data;
   }
 }
 
-class SimpleTrack {
+class PlaylistData {
   String? name;
-  List<String>? artistNames;
+  List<String>? imageUrls;
+  String? id;
 
-  SimpleTrack({this.name, this.artistNames});
+  PlaylistData({this.name, this.imageUrls, this.id});
 
-  SimpleTrack.fromJson(Map<String, dynamic> json) {
+  PlaylistData.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    if (json['artists'] != null) {
-      artistNames = <String>[];
-      json['artists'].forEach((v) {
-        artistNames!.add(v['name']);
+    id = json['id'];
+    if (json['images'] != null) {
+      imageUrls = <String>[];
+      json['images'].forEach((image) {
+        imageUrls!.add(image['url']);
       });
     }
   }
@@ -42,8 +45,9 @@ class SimpleTrack {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
-    if (artistNames != null) {
-      data['artists'] = artistNames!.map((name) => {'name': name}).toList();
+    data['id'] = id;
+    if (imageUrls != null) {
+      data['images'] = imageUrls!.map((url) => {'url': url}).toList();
     }
     return data;
   }
