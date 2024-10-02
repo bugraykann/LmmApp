@@ -38,4 +38,24 @@ class RemoteSpotifyAuthDataSource {
         onError: (e) => (e as DioException)
             .toEitherBaseError<({String token, SpotifyToken spotifyToken})>(),
       );
+
+  Future<Either<BaseError, SpotifyToken>> refresh(String refreshToken) async {
+    return _networkManager.post(
+      Env.tokenUrl,
+      options: Options(
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization':
+              'Basic ${base64Encode(utf8.encode('${Env.clientId}:${Env.clientSecret}'))}',
+        },
+      ),
+      data: {
+        'grant_type': 'refresh_token',
+        'refresh_token': refreshToken,
+      },
+    ).then(
+      (res) => right(SpotifyToken.fromJson(res.data)),
+      onError: (e) => (e as DioException).toEitherBaseError<SpotifyToken>(),
+    );
+  }
 }

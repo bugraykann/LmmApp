@@ -11,8 +11,14 @@ class SpotifyToken {
   factory SpotifyToken.fromJson(Map<String, dynamic> json) {
     return SpotifyToken(
       accessToken: json['access_token'],
-      refreshToken: json['refresh_token'],
+      refreshToken: json['refresh_token'] ?? '',
       expiresIn: json['expires_in'],
     );
+  }
+  DateTime? get expirationTime {
+    if (expiresIn > 0) {
+      return DateTime.now().add(Duration(seconds: expiresIn));
+    }
+    return null;
   }
 }

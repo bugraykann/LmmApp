@@ -14,13 +14,6 @@ class SplashView extends ConsumerStatefulWidget {
 
 class _SplashViewState extends ConsumerState<SplashView> {
   late SplashViewModel viewModel;
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      viewModel.getData();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,7 @@
+import 'package:hive/hive.dart';
+
+part 'music.g.dart';
+
 class MusicModel {
   List<MusicData>? tracks;
   String? nextUrl;
@@ -25,9 +29,13 @@ class MusicModel {
   }
 }
 
+@HiveType(typeId: 0)
 class MusicData {
+  @HiveField(0)
   String? name;
+  @HiveField(1)
   List<String>? artistNames;
+  @HiveField(2)
   List<String>? imageUrls;
 
   MusicData({this.name, this.artistNames, this.imageUrls});

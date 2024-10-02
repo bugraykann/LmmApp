@@ -6,8 +6,12 @@ class LocalAuthDataSource {
   final Box<dynamic> _settingsBox;
 
   String? getToken() => _settingsBox.get('token');
+  String? getRefreshToken() => _settingsBox.get('refreshToken');
 
-  Future<void> changeToken(String token) => _settingsBox.put('token', token);
+  Future<void> changeToken(String token, String refreshToken) async {
+    await _settingsBox.put('token', token);
+    await _settingsBox.put('refreshToken', refreshToken);
+  }
 
   Future<void> deleteToken() => Database.clear();
 }

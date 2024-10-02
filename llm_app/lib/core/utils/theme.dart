@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:llm_app/core/constants/constants.dart';
 import 'package:llm_app/core/extensions/extensions.dart';
 
@@ -5,7 +7,7 @@ class ClassicTheme {
   static ThemeData get dark => _theme(
         colorScheme: const ColorScheme(
           brightness: Brightness.dark,
-          primary: Color(0xFF4CAF50), // Yeşil renk tonu
+          primary: Color(0xFF4CAF50),
           onPrimary: Colors.white,
           secondary: Color(0xFF3700B3),
           onSecondary: Colors.white,

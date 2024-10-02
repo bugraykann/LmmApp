@@ -1,3 +1,4 @@
+//@dart=3.0
 import 'package:dartz/dartz.dart';
 import 'package:llm_app/core/base/model/base_error.dart';
 import 'package:llm_app/domain/entitties/spotify_token.dart';
@@ -16,9 +17,26 @@ class SpotifyAuthRepositoryImpl implements SpotifyAuthRepository {
     final data = result.foldRight<({String token, SpotifyToken spotifyToken})?>(
         null, (r, previous) => r);
     if (data == null) return result;
-    await _localAuthDataSource.changeToken(data.spotifyToken.accessToken);
+    await _localAuthDataSource.changeToken(
+        data.spotifyToken.accessToken, data.spotifyToken.refreshToken);
 
     return result;
+  }
+
+  @override
+  Future<Either<BaseError, SpotifyToken>> refreshToken() async {
+    final refreshToken = _localAuthDataSource.getRefreshToken();
+    if (refreshToken == null || refreshToken.isEmpty) {
+      return left(BaseError(
+        0,
+      ));
+    }
+
+    final result = await _remoteSpotifyAuthDataSource.refresh(refreshToken);
+    return result.map((data) {
+      _localAuthDataSource.changeToken(data.accessToken, data.refreshToken);
+      return data;
+    });
   }
 
   @override

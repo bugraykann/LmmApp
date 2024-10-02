@@ -35,7 +35,6 @@ class RemoteLikedMusicListDataSource {
         ),
       );
 
-      // Parse the response into a SimplePlaylist object
       final MusicModel currentLikedMusicList =
           MusicModel.fromJson(response.data);
 
